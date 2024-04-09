@@ -1,0 +1,197 @@
+[2024-04-09 07:03:33][INFO][dist:782] - W&B RUN: [effortless-deluge-1](https://wandb.ai/yzlin/WordPlay/runs/21ytxkua)
+[2024-04-09 07:03:33][INFO][dist:810] - Running on machine='Polaris'
+[2024-04-09 07:03:33][WARNING][__main__:87] - {
+    "train": {
+        "framework": "pytorch",
+        "backend": "DDP",
+        "device": null,
+        "seed": null,
+        "port": null,
+        "ds_config_path": null,
+        "precision": null,
+        "ngpus": null,
+        "use_wandb": true,
+        "eval_interval": 250,
+        "log_interval": 5,
+        "eval_iters": 200,
+        "eval_only": false,
+        "always_save_checkpoint": false,
+        "init_from": "scratch",
+        "wandb_project": "WordPlay",
+        "max_iters": 100,
+        "warmup_iters": 100,
+        "dtype": "bfloat16",
+        "compile": false
+    },
+    "model": {
+        "n_layer": 6,
+        "n_head": 6,
+        "n_embd": 384,
+        "batch_size": 64,
+        "block_size": 256,
+        "activation": "gelu",
+        "dropout": 0.2,
+        "bias": false,
+        "vocab_size": 65
+    },
+    "data": {
+        "dataset": "shakespeare_char",
+        "out_dir": "out-shakespeare-char",
+        "root_path": null
+    },
+    "optimizer": {
+        "gas": 1,
+        "name": "AdamW",
+        "learning_rate": 0.001,
+        "weight_decay": 0.1,
+        "beta1": 0.9,
+        "beta2": 0.99,
+        "grad_clip": 1.0,
+        "decay_lr": true,
+        "lr_decay_iters": 5000,
+        "min_lr": 0.0001
+    }
+}
+[2024-04-09 07:03:33][WARNING][__main__:88] - Output dir: /home/yuzhenglin/wordplay/src/outputs/runs/shakespeare/pytorch/DDP/2024-04-09/07-03-28
+[2024-04-09 07:03:33][INFO][trainer:227] - Initializing a new model from scratch
+[2024-04-09 07:03:33][INFO][model:255] - number of parameters: 10.65M
+[2024-04-09 07:03:33][INFO][model:445] - num decayed parameter tensors: 26, with 10,740,096 parameters
+[2024-04-09 07:03:33][INFO][model:449] - num non-decayed parameter tensors: 13, with 4,992 parameters
+[2024-04-09 07:03:33][INFO][model:465] - using fused AdamW: True
+[2024-04-09 07:03:33][CRITICAL][trainer:296] - "devid='cuda:0'"
+[2024-04-09 07:03:36][INFO][trainer:333] - • self.model=GPT(
+  (transformer): ModuleDict(
+    (wte): Embedding(65, 384)
+    (wpe): Embedding(256, 384)
+    (drop): Dropout(p=0.2, inplace=False)
+    (h): ModuleList(
+      (0-5): 6 x Block(
+        (ln_1): LayerNorm()
+        (attn): CausalSelfAttention(
+          (c_attn): Linear(in_features=384, out_features=1152, bias=False)
+          (c_proj): Linear(in_features=384, out_features=384, bias=False)
+          (attn_dropout): Dropout(p=0.2, inplace=False)
+          (resid_dropout): Dropout(p=0.2, inplace=False)
+        )
+        (ln_2): LayerNorm()
+        (mlp): MLP(
+          (c_fc): Linear(in_features=384, out_features=1536, bias=False)
+          (act_fn): GELU(approximate='none')
+          (c_proj): Linear(in_features=1536, out_features=384, bias=False)
+          (dropout): Dropout(p=0.2, inplace=False)
+        )
+      )
+    )
+    (ln_f): LayerNorm()
+  )
+  (lm_head): Linear(in_features=384, out_features=65, bias=False)
+)
+[2024-04-09 07:03:36][INFO][trainer:334] - • self.grad_scaler=<torch.cuda.amp.grad_scaler.GradScaler object at 0x1527276b8460>
+[2024-04-09 07:03:36][INFO][trainer:335] - • self.model_engine=DistributedDataParallel(
+  (module): GPT(
+    (transformer): ModuleDict(
+      (wte): Embedding(65, 384)
+      (wpe): Embedding(256, 384)
+      (drop): Dropout(p=0.2, inplace=False)
+      (h): ModuleList(
+        (0-5): 6 x Block(
+          (ln_1): LayerNorm()
+          (attn): CausalSelfAttention(
+            (c_attn): Linear(in_features=384, out_features=1152, bias=False)
+            (c_proj): Linear(in_features=384, out_features=384, bias=False)
+            (attn_dropout): Dropout(p=0.2, inplace=False)
+            (resid_dropout): Dropout(p=0.2, inplace=False)
+          )
+          (ln_2): LayerNorm()
+          (mlp): MLP(
+            (c_fc): Linear(in_features=384, out_features=1536, bias=False)
+            (act_fn): GELU(approximate='none')
+            (c_proj): Linear(in_features=1536, out_features=384, bias=False)
+            (dropout): Dropout(p=0.2, inplace=False)
+          )
+        )
+      )
+      (ln_f): LayerNorm()
+    )
+    (lm_head): Linear(in_features=384, out_features=65, bias=False)
+  )
+)
+[2024-04-09 07:03:36][INFO][trainer:336] - • self.optimizer=AdamW (
+Parameter Group 0
+    amsgrad: False
+    betas: (0.9, 0.99)
+    capturable: False
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: True
+    lr: 0.001
+    maximize: False
+    weight_decay: 0.1
+Parameter Group 1
+    amsgrad: False
+    betas: (0.9, 0.99)
+    capturable: False
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: True
+    lr: 0.001
+    maximize: False
+    weight_decay: 0.0
+)
+  0%|          | 0/100 [00:00<?, ?it/s]
+[2024-04-09 07:03:36][INFO][trainer:769] - Startup time: 7.9205
+                              Training Legend
+┏━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃    abbr    ┃ desc                                                        ┃
+┡━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│    step    │ Current training iteration                                  │
+│    loss    │ Loss value                                                  │
+│     dt     │ Elapsed time per training step (measured in **ms**)         │
+│    dtf     │ Elapsed time per forward step (measured in **ms**)          │
+│    dtb     │ Elapsed time per backward step (measured in **ms**)         │
+│    sps     │ Samples per second                                          │
+│    mtps    │ Tokens per second, measured in MEGA (1 x 10^6) tokens / sec │
+│    mfu     │ Model flops utilization                                     │
+│ train_loss │ Training loss value                                         │
+│  val_loss  │ Validation loss value                                       │
+└────────────┴─────────────────────────────────────────────────────────────┘
+
+ 11%|█         | 11/100 [00:05<00:15,  5.85it/s]
+[2024-04-09 07:03:41][INFO][trainer:837] - step=5 loss=3.6247 dt=95.7603 dtf=4.5054 dtb=88.5704 sps=83.5419 mtps=1.3688 mfu=-100.0000 train_loss=4.2116 val_loss=4.2043
+[2024-04-09 07:03:41][INFO][trainer:837] - step=10 loss=3.2818 dt=124.8009 dtf=4.6163 dtb=117.5163 sps=64.1021 mtps=1.0502 mfu=2.9857 train_loss=4.2116 val_loss=4.2043
+[2024-04-09 07:03:42][INFO][trainer:837] - step=15 loss=3.0104 dt=121.1755 dtf=4.4014 dtb=114.7573 sps=66.0199 mtps=1.0817 mfu=2.9947 train_loss=4.2116 val_loss=4.2043
+
+ 33%|███▎      | 33/100 [00:07<00:06, 10.95it/s]
+[2024-04-09 07:03:42][INFO][trainer:837] - step=25 loss=2.6934 dt=54.9412 dtf=4.4219 dtb=48.5395 sps=145.6103 mtps=2.3857 mfu=3.3648 train_loss=4.2116 val_loss=4.2043
+[2024-04-09 07:03:43][INFO][trainer:837] - step=30 loss=2.6228 dt=95.3297 dtf=4.4477 dtb=87.9100 sps=83.9193 mtps=1.3749 mfu=3.4192 train_loss=4.2116 val_loss=4.2043
+[2024-04-09 07:03:43][INFO][trainer:837] - step=35 loss=2.5825 dt=61.3870 dtf=4.3759 dtb=55.0339 sps=130.3208 mtps=2.1352 mfu=3.6843 train_loss=4.2116 val_loss=4.2043
+[2024-04-09 07:03:44][INFO][trainer:837] - step=40 loss=2.5409 dt=58.1162 dtf=4.3965 dtb=51.0473 sps=137.6551 mtps=2.2553 mfu=3.9570 train_loss=4.2116 val_loss=4.2043
+
+ 55%|█████▌    | 55/100 [00:09<00:04, 10.53it/s]
+[2024-04-09 07:03:45][INFO][trainer:837] - step=50 loss=2.4791 dt=104.8467 dtf=4.5213 dtb=80.9724 sps=76.3019 mtps=1.2501 mfu=3.8582 train_loss=4.2116 val_loss=4.2043
+[2024-04-09 07:03:45][INFO][trainer:837] - step=55 loss=2.4931 dt=131.4591 dtf=4.5930 dtb=124.8890 sps=60.8554 mtps=0.9971 mfu=3.7558 train_loss=4.2116 val_loss=4.2043
+
+ 77%|███████▋  | 77/100 [00:11<00:02, 11.04it/s]
+[2024-04-09 07:03:46][INFO][trainer:837] - step=65 loss=2.4904 dt=99.9265 dtf=4.3970 dtb=93.5596 sps=80.0589 mtps=1.3117 mfu=3.7799 train_loss=4.2116 val_loss=4.2043
+[2024-04-09 07:03:47][INFO][trainer:837] - step=70 loss=2.4599 dt=61.3607 dtf=4.5125 dtb=54.2177 sps=130.3765 mtps=2.1361 mfu=4.0092 train_loss=4.2116 val_loss=4.2043
+[2024-04-09 07:03:47][INFO][trainer:837] - step=75 loss=2.4978 dt=113.2326 dtf=4.3524 dtb=106.9494 sps=70.6510 mtps=1.1575 mfu=3.9373 train_loss=4.2116 val_loss=4.2043
+
+ 97%|█████████▋| 97/100 [00:13<00:00, 10.93it/s]
+[2024-04-09 07:03:48][INFO][trainer:837] - step=85 loss=2.4239 dt=93.9800 dtf=4.3778 dtb=87.6381 sps=85.1245 mtps=1.3947 mfu=3.8674 train_loss=4.2116 val_loss=4.2043
+[2024-04-09 07:03:48][INFO][trainer:837] - step=90 loss=2.4435 dt=133.6492 dtf=5.8736 dtb=125.0880 sps=59.8582 mtps=0.9807 mfu=3.7595 train_loss=4.2116 val_loss=4.2043
+[2024-04-09 07:03:49][INFO][trainer:837] - step=95 loss=2.4445 dt=99.9236 dtf=4.5209 dtb=92.7147 sps=80.0611 mtps=1.3117 mfu=3.7565 train_loss=4.2116 val_loss=4.2043
+
+100%|██████████| 100/100 [00:13<00:00,  7.35it/s]
+[2024-04-09 07:03:51][INFO][__main__:113] - ['prompt']: 'What is an LLM?'
+[2024-04-09 07:03:51][INFO][__main__:114] - ['response']:
+What is an LLM?
+NRLANCUR:
+I foo te onk aroure thon.
+TERD thed theat ceee chow.
+Teno sth:
+Anor'lacke I an wot a bele I sonesoullo nolathardo averen t ow ath anow ofend I's bow ffugord sine othe, he ther amure y w blellleritherton t is your wherethe t tin mmun the t
+[2024-04-09 07:03:51][INFO][trainer:735] - Saving checkpoint to: /home/yuzhenglin/wordplay/src/outputs/runs/shakespeare/pytorch/DDP/2024-04-09/07-03-28
+[2024-04-09 07:03:51][INFO][trainer:736] - Saving model to: /home/yuzhenglin/wordplay/src/outputs/runs/shakespeare/pytorch/DDP/2024-04-09/07-03-28/model.pth
+[2024-04-09 07:03:51][INFO][configs:141] - Appending /home/yuzhenglin/wordplay/src/outputs/runs/shakespeare/pytorch/DDP/2024-04-09/07-03-28 to /home/yuzhenglin/wordplay/src/ckpts/checkpoints.log
